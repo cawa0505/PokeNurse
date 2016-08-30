@@ -5,8 +5,6 @@ import {
   ipcRenderer
 } from 'electron'
 import $ from 'jquery'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 import MainMenu from '../Menu'
 import Status from './components/Status'
@@ -15,10 +13,6 @@ import SpeciesCounter from './components/SpeciesPokemonCounter'
 import CheckCounter from './components/CheckCounter'
 
 import confirmDialog from '../ConfirmationDialog'
-import {
-  updateStatus,
-  logout
-} from '../../actions'
 import {
   Immutable,
   Organize
@@ -220,13 +214,6 @@ const Table = React.createClass({
                 id="evolve-btn"
                 value="Evolve"
                 onClick={this.handleEvolve}
-              />
-              {" "}
-              <input
-                type="button"
-                className="btn btn-default"
-                value="Sign Out"
-                onClick={this.handleSignOut}
               />
             </span>
           </h1>
@@ -485,9 +472,6 @@ const Table = React.createClass({
     this.speciesTable.toggleShowAllSpecies()
   },
 
-  handleSignOut() {
-    this.props.logout()
-  }
 })
 
-export default connect(null, (dispatch => bindActionCreators({ updateStatus, logout }, dispatch)))(Table)
+export default Table
