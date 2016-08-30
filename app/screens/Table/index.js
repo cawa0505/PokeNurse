@@ -5,6 +5,8 @@ import {
   ipcRenderer
 } from 'electron'
 import $ from 'jquery'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import MainMenu from '../Menu'
 import Status from './components/Status'
@@ -13,6 +15,9 @@ import SpeciesCounter from './components/SpeciesPokemonCounter'
 import CheckCounter from './components/CheckCounter'
 
 import confirmDialog from '../ConfirmationDialog'
+import {
+  updateStatus
+} from '../../actions'
 import {
   Immutable,
   Organize
@@ -77,8 +82,7 @@ function setBackgroundImage(team) {
 const Table = React.createClass({
 
   propTypes: {
-    updateStatus: PropTypes.func.isRequired,
-    logout: PropTypes.func.isRequired
+    updateStatus: PropTypes.func.isRequired
   },
 
   childContextTypes: {
@@ -474,4 +478,4 @@ const Table = React.createClass({
 
 })
 
-export default Table
+export default connect(null, (dispatch => bindActionCreators({ updateStatus }, dispatch)))(Table)
